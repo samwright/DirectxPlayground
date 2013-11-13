@@ -1,5 +1,5 @@
 #ifndef _EXERCISE_
-#define _EXERCISE
+#define _EXERCISE_
 
 #include <d3d9.h>
 

@@ -1,13 +1,17 @@
 #include "stdafx.h"
 #include <stddef.h>
 #include "ExerciseRegistry.h"
+#include "Exercise.h"
+#include "DirectXPipeline.h"
+#include "TriangleExercise.h"
 
 ExerciseRegistry* ExerciseRegistry::instance = new ExerciseRegistry();
 const char* ExerciseRegistry::name = "Exercise Registry";
 
-void ExerciseRegistry::setDevices(LPDIRECT3D9 d3d, LPDIRECT3DDEVICE9 d3ddev) {
-	this->d3d = d3d;
-	this->d3ddev = d3ddev;
+ExerciseRegistry::ExerciseRegistry() {
+	addExercise(new TriangleExercise());
+
+	selectExercise(0);
 }
 
 void ExerciseRegistry::setupPipeline() {
@@ -47,10 +51,12 @@ Exercise* ExerciseRegistry::getExercise(int index) {
 void ExerciseRegistry::selectExercise(int index) {
 	Exercise* new_exercise = getExercise(index);
 	if (new_exercise != NULL) {
-		if (current != NULL)
-			current->closePipeline();
+		if (d3d && d3ddev) {
+			if (current != NULL)
+				current->closePipeline();
+			new_exercise->setupPipeline();
+		}
 		current = new_exercise;
-		current->setupPipeline();
 	}
 }
 

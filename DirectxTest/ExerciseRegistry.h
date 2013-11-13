@@ -10,10 +10,6 @@ public:
 
 	virtual ~ExerciseRegistry() { delete exercises; }
 
-	void setDevices(LPDIRECT3D9 d3d, LPDIRECT3DDEVICE9 d3ddev);
-	LPDIRECT3D9 getD3d();
-	LPDIRECT3DDEVICE9 getD3ddev();
-
 	void addExercise(Exercise* exercise);
 	Exercise* getExercise(int index);
 	int getTotalRegistered() { return totalRegistered; }
@@ -26,12 +22,9 @@ public:
 	void handle(MSG &msg);
 
 private:
-	ExerciseRegistry() { current = NULL; };
+	ExerciseRegistry();
 	ExerciseRegistry(ExerciseRegistry const&) {};
 	ExerciseRegistry& operator=(ExerciseRegistry const&) {};
-	
-	LPDIRECT3D9 d3d;
-	LPDIRECT3DDEVICE9 d3ddev;
 	
 	int totalRegistered = 0;
 	int maxExercises = 0;

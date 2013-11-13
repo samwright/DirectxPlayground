@@ -2,9 +2,8 @@
 #include "ExerciseRegistry.h"
 #include "DirectXPipeline.h"
 
-
-LPDIRECT3D9 d3d;    // the pointer to our Direct3D interface
-LPDIRECT3DDEVICE9 d3ddev;    // the pointer to the device class
+LPDIRECT3D9 d3d = NULL;    // the pointer to our Direct3D interface
+LPDIRECT3DDEVICE9 d3ddev = NULL;    // the pointer to the device class
 
 void initD3D(HWND hWnd)
 {
@@ -26,7 +25,6 @@ void initD3D(HWND hWnd)
 		&d3dpp,
 		&d3ddev);
 
-	ExerciseRegistry::getInstance()->setDevices(d3d, d3ddev);
 	ExerciseRegistry::getInstance()->setupPipeline();
 }
 
